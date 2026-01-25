@@ -1,0 +1,24 @@
+{
+  "name": "laborrx-product-overview",
+  "version": "1.0.0",
+  "description": "LaborRx Product Overview Animation",
+  "scripts": {
+    "dev": "remotion studio",
+    "build": "remotion render LaborRxOverview out/laborrx-overview.mp4",
+    "render": "remotion render LaborRxOverview out/laborrx-overview.mp4"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.409",
+    "@remotion/player": "^4.0.409",
+    "@remotion/tailwind": "^4.0.409",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "remotion": "^4.0.409",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
+  }
+}
