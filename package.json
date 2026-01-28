@@ -4,16 +4,18 @@
   "description": "LaborRx Product Overview Animation",
   "scripts": {
     "dev": "remotion studio",
-    "build": "remotion render LaborRxOverview out/laborrx-overview.mp4",
+    "dev:web": "next dev",
+    "build": "next build",
     "render": "remotion render LaborRxOverview out/laborrx-overview.mp4"
   },
   "dependencies": {
     "@remotion/cli": "^4.0.409",
-    "@remotion/player": "^4.0.409",
+    "@remotion/player": "^4.0.410",
     "@remotion/tailwind": "^4.0.409",
     "@types/react": "^19.2.9",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.23",
+    "next": "^16.1.6",
     "postcss": "^8.5.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
