@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": ["dom", "esnext"],
+    "target": "es2017",
+    "moduleResolution": "bundler",
+    "module": "ESNext",
+    "jsx": "react",
+    "strict": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  }
+}
