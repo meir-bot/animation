@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useRouter } from 'next/navigation'
 import { useStore } from '@/lib/store'
-import type { Thread } from '@/lib/types'
 import { ThreadCard } from './ThreadCard'
 import { NewThreadModal } from './NewThreadModal'
+import { OnboardingSheet } from './OnboardingSheet'
 import { BottomNav } from '@/components/layout/BottomNav'
 import { SpringButton } from '@/components/ui/SpringButton'
 import { Plus, Sparkles } from 'lucide-react'
@@ -14,8 +14,18 @@ import { Plus, Sparkles } from 'lucide-react'
 export function ThreadListView() {
   const router = useRouter()
   const threads = useStore((s) => s.threads)
+  const apiKeys = useStore((s) => s.apiKeys)
   const [showNew, setShowNew] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
+  const [showOnboarding, setShowOnboarding] = useState(false)
+
+  // Show onboarding if no API key and no threads yet
+  useEffect(() => {
+    if (!apiKeys.anthropic && threads.length === 0) {
+      const timer = setTimeout(() => setShowOnboarding(true), 600)
+      return () => clearTimeout(timer)
+    }
+  }, [apiKeys.anthropic, threads.length])
 
   const pinned = threads.filter((t) => t.pinned)
   const recent = threads
@@ -137,6 +147,12 @@ export function ThreadListView() {
 
       <AnimatePresence>
         {showNew && <NewThreadModal onClose={() => setShowNew(false)} />}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showOnboarding && (
+          <OnboardingSheet onComplete={() => setShowOnboarding(false)} />
+        )}
       </AnimatePresence>
     </div>
   )

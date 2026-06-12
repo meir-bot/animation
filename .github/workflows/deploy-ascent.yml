@@ -1,0 +1,37 @@
+name: Deploy Ascent to Vercel
+
+on:
+  push:
+    branches: [main, claude/calorie-job-helper-app-t2x8x4]
+    paths: ['ascent/**']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: ascent/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ascent
+        run: npm install --legacy-peer-deps
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel
+
+      - name: Pull Vercel Environment
+        working-directory: ascent
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build
+        working-directory: ascent
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy
+        working-directory: ascent
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
