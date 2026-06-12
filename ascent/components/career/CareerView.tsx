@@ -4,9 +4,9 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '@/lib/store'
 import { BottomNav } from '@/components/layout/BottomNav'
-import { TimelineEntry } from './TimelineEntry'
 import { SkillsCloud } from './SkillsCloud'
 import { CareerStats } from './CareerStats'
+import { MagazineCard } from './MagazineCard'
 import { BarChart3, Cloud, TrendingUp } from 'lucide-react'
 
 type ViewMode = 'timeline' | 'skills' | 'stats'
@@ -92,20 +92,18 @@ export function CareerView() {
               {/* Career summary card */}
               <CareerSummaryCard profile={profile} />
 
-              {/* Timeline */}
-              <div style={{ position: 'relative', paddingLeft: 32 }}>
-                {/* Vertical line */}
-                <div style={{
-                  position: 'absolute',
-                  left: 11,
-                  top: 8,
-                  bottom: 8,
-                  width: 1,
-                  background: 'linear-gradient(to bottom, rgba(124,92,252,0.4), rgba(0,212,255,0.4), transparent)',
-                }} />
-
+              {/* Magazine timeline */}
+              <div>
+                <p style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(244,244,246,0.3)', marginBottom: 16 }}>
+                  Career History
+                </p>
                 {profile.careerEntries.map((entry, i) => (
-                  <TimelineEntry key={entry.id} entry={entry} index={i} />
+                  <MagazineCard
+                    key={entry.id}
+                    entry={entry}
+                    index={i}
+                    featured={i === 0}
+                  />
                 ))}
               </div>
 
